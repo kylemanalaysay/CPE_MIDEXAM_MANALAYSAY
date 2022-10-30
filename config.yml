@@ -1,0 +1,34 @@
+---
+
+- hosts: all
+  become: true
+  become_user: root
+  become_method: sudo
+  connection: ssh
+  gather_facts: true
+  roles:
+    - elk_config
+
+- hosts: ubuntu_server
+  become: true
+  become_user: root
+  become_method: sudo
+  connection: ssh
+  gather_facts: true
+  roles:
+    - pro_ubuntu
+    - influx_ubuntu
+    - lamp_ubuntu
+
+- hosts: centos_server
+  become: true
+  become_user: root
+  become_method: sudo
+  connection: ssh
+  gather_facts: true
+  roles:
+    - nagios
+    - pro_centos
+    - influx_centos
+    - lamp_centos
+
