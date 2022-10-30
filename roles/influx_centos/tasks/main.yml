@@ -1,0 +1,12 @@
+---
+
+- name: Install InfluxDB packages
+  ansible.builtin.dnf:
+     name: influxdb
+     state: present
+
+- name: Starting influxdb
+  ansible.builtin.systemd:
+    name: influxdb
+    enabled: yes
+    state: restarted

@@ -1,0 +1,32 @@
+---
+
+- name: Install prerequisites
+  apt: name={{ item }} update_cache=yes state=latest force_apt_get=yes
+  loop: [ 'aptitude' ]
+
+  #Apache Configuration
+- name: Install LAMP Packages
+  apt: name={{ item }} update_cache=yes state=latest
+  loop: [ 'apache2', 'mysql-server', 'python3-pymysql', 'php', 'php-mysql', 'libapache2-mod-php', 'mariadb-server', 'mariadb-client' ]
+
+- name: php testp page
+  shell: echo '<?php phpinfo(); ?>' | sudo tee -a /var/www/html/phpinfo.php > /dev/null
+  become: true
+
+- name: start apache
+  service:
+    name: apache2
+    state: restarted
+    enabled: yes
+
+- name: start mysql-server
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: "Mariadb- Restarting/Enabling"
+  service:
+    name: mariadb
+    state: restarted
+    enabled: true

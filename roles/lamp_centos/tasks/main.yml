@@ -1,0 +1,27 @@
+---
+
+- name: Installing Apache, MySQL and PHP
+  yum:
+    name:
+      - httpd
+      - php
+      - php-mysql
+      - mariadb-server
+      - mariadb
+    state: installed
+
+- name: php test page
+  shell: echo '<?php phpinfo(); ?>' | sudo tee -a /var/www/html/phpinfo.php > /dev/null
+  become: true
+
+- name: Enabling and Starting the service httpd
+  service:
+    name: httpd
+    enabled: yes
+    state: started
+
+- name: "Mariadb- Restarting/Enabling"
+  service:
+    name: mariadb
+    state: restarted
+    enabled: true
