@@ -1,0 +1,6 @@
+---
+
+elastic: "elasticsearch-8.4.3-linux-x86_64"
+kibana: "kibana-8.4.3"
+logstash: "logstash-8.4.3-linux-x86_64"
+
