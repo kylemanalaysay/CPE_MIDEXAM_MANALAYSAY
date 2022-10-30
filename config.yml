@@ -28,7 +28,6 @@
   gather_facts: true
   roles:
     - nagios
-    - pro_centos
+    - pro_cent
     - influx_centos
     - lamp_centos
-
